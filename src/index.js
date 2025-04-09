@@ -1,7 +1,7 @@
 import './pages/index.css';
 import {initialCards} from './components/cards';
 import {createCard, deleteCard, likeCard} from './components/card';
-import {openModal, eventKeydown, eventClick, closeModal} from './components/modal';
+import {openModal, checkKeydown, checkClick, closeModal} from './components/modal';
 
 const placesList = document.querySelector('.places__list');
 const popupTypeImage = document.querySelector('.popup_type_image');
@@ -22,6 +22,7 @@ const newInputUrl = newPlace.querySelector('.popup__input_type_url');
 
 function viewImage(someImage) {
     popupImage.src = someImage.src;
+    popupImage.alt = someImage.name;
     popupCaption.textContent = someImage.closest('.card').querySelector('.card__title').textContent;
     openModal(popupTypeImage);
 };
@@ -44,7 +45,7 @@ function handleNewCardFormSubmit(evt) {
     const newCardUrl = newInputUrl.value;
     placesList.prepend(createCard(newCardUrl, newCardName, deleteCard, likeCard, viewImage));
     closeModal(popupNewCard);
-    newPlace.requestFullscreen();
+    newPlace.reset();
 };
 
 initialCards.forEach(element => {
@@ -57,13 +58,13 @@ profileAddButton.addEventListener('click', function() {
 });
 
 popupNewCard.addEventListener('click', function(evt) {
-    eventClick(evt, popupNewCard);
+    checkClick(evt, popupNewCard);
 });
 
 newPlace.addEventListener('submit', handleEditFormSubmit);
 
 popupTypeImage.addEventListener('click', function(evt) {
-    eventClick(evt, popupTypeImage);
+    checkClick(evt, popupTypeImage);
 });
 
 editButton.addEventListener('click', function() {
@@ -72,7 +73,7 @@ editButton.addEventListener('click', function() {
 });
 
 editPopup.addEventListener('click', function(evt) {
-    eventClick(evt, editPopup);
+    (evt, editPopup);
 });
 
 editProfile.addEventListener('submit', handleEditFormSubmit);
@@ -83,7 +84,7 @@ profileAddButton.addEventListener('click', function() {
 });
 
 popupNewCard.addEventListener('click', function(evt) {
-    eventClick(evt, popupNewCard);
+    checkClick(evt, popupNewCard);
 });
 
 newPlace.addEventListener('submit', handleNewCardFormSubmit);

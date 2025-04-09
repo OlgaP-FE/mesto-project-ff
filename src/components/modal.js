@@ -1,24 +1,24 @@
-export {openModal, eventKeydown, eventClick, closeModal}
+export {openModal, checkKeydown, checkClick, closeModal}
 
 function openModal(popup) {
     popup.classList.add('popup_is-opened');
-    document.addEventListener('keydown', eventKeydown);
+    document.addEventListener('keydown', checkKeydown);
 };
 
-function eventKeydown(evt) {
-    evt.stopImmediatePropagation();
-    const popupOpened = document.querySelector('.popup_is-opened');
+function checkKeydown(evt) {
     if (evt.key === 'Escape') {
+        evt.stopImmediatePropagation();
+        const popupOpened = document.querySelector('.popup_is-opened');
         closeModal(popupOpened);
-    };
+    }
 };
 
 function closeModal(popup) {
-    document.removeEventListener('keydown', eventKeydown);
+    document.removeEventListener('keydown', checkKeydown);
     popup.classList.remove('popup_is-opened');
 };
 
-function eventClick(evt, popup) {
+function checkClick(evt, popup) {
     evt.stopImmediatePropagation();
     const popupClosed = popup.querySelector('.popup__close');
     if(evt.target === popup || evt.target === popupClosed) {
